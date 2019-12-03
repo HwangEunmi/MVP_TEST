@@ -1,0 +1,52 @@
+// TODO : https://github.com/taehwandev/AndroidMVPSample
+[Clean Architecture가 필요한 이유?]
+
+우리는 양질의 소프트웨어를 작성하는 것이 어렵고 복잡하다는 것을 알고 있다.
+요구 사항을 충족시키는 것만이 아니라 성장과 변화에 적응할 수 있을정도로 견고하고 유지관리가 가능하며
+테스트가 가능하고 유연해야 한다.
+
+즉, Clean Architecture는 중요하다.
+
+다음은 Clean Architecture와 관련된 어휘이다.
+* Entities :  App의 비즈니스 오브젝트이다. 비즈니스단이다.
+* 인터렉터 : Entities와의 데이터 흐름을 관장한다.
+* Presenter 또는 Controller : Entities를 위해 가장 편리한 형식으로 데이터를 변환해준다.
+
+Clean Architecture의 목적은 비즈니스단을 외부와 분리하여 종속성 없이 테스트하기 위한 것이다.
+
+프로젝트는 크게 세가지로 나눌 수 있다.
+각 계층은 각각 고유한 목적을 가지고 있으며 다른 계층과는 별도로 작동한다.
+
+1. Presentation Layer
+-> View 그리고 Animation과 관련된 로직이 발생하는 곳이다. UI 로직 이외의 다른 로직은 들어가면 안된다.
+   이 계층의 Presenter는 UI Thread가 아닌 새로운 Thread에서 작업을 수행한 후, View에 뿌려줄 Data와 함께 콜백을 사용하여 돌아오는 형태로 구성된다.
+
+   View <-> Presenter,  Presenter <-> Model
+
+2. Domain Layer
+-> 모든 로직은 이곳에서 발생한다.
+
+3. Data Layer
+-> App에 필요한 모든 데이터는 User Repository (인터페이스가 Domain Layer에 있음) 을 통해 이 계층에서 제공된다.
+   Disk Cache나 Memory Cache를 사용하는 경우도 있다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

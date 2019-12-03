@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".view.main.MainActivity">
+
+    <ScrollView
+        android:id="@+id/sv_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--Toolbar-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_bar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorAccent" />
+
+            <!--Spinner & EditText-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/sp_view"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null" />
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_search" />
+
+            </LinearLayout>
+
+            <!--TabLayout-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tb_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#999999" />
+
+            <!--ViewPager-->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="#99CC" />
+
+            <!--RecyclerView-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="#006600" />
+
+            <!--RecyclerView-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_brand_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#666633" />
+
+            <!--ImageView-->
+            <ImageView
+                android:id="@+id/iv_view"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#FF6666" />
+
+            <!--RecyclerVIew(Grid)-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#993300" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
