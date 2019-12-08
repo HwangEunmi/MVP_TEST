@@ -1,13 +1,14 @@
 package com.theory.emhwang.ssg_ui.data.card;
 
 public class CardModel {
-    private int num;
 
-    public CardModel(final int num) {
-        this.num = num;
-    }
-    public int getNum() {
-        return num;
+    private String mText;
+
+    public CardModel(final String text) {
+        this.mText = text;
     }
 
+    public String getmText() {
+        return mText;
+    }
 }

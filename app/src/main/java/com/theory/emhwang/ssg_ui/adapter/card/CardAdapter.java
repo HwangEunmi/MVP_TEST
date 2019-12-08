@@ -42,7 +42,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder>
         if (holder == null)
             return;
         holder.setClickListener(position);
-        holder.setViewData(position);
+        holder.setViewData(mList.get(position));
     }
 
     @Override

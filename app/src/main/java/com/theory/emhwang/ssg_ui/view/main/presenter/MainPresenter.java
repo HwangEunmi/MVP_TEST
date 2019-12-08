@@ -1,11 +1,15 @@
 package com.theory.emhwang.ssg_ui.view.main.presenter;
 
+import java.util.List;
+
+import com.google.firebase.database.DatabaseException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.theory.emhwang.ssg_ui.adapter.card.contract.CardAdapterContract;
 import com.theory.emhwang.ssg_ui.data.card.CardModel;
+import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
+import com.theory.emhwang.ssg_ui.data.card.source.ICardSource;
 import com.theory.emhwang.ssg_ui.listener.OnItemClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -16,6 +20,9 @@ public class MainPresenter implements MainContract.Presenter {
     private CardAdapterContract.View mRvCardView;
 
     private CardAdapterContract.Model mRvCardModel;
+
+    // 카드 Data Repository
+    private CardRepository mCardDataRepository;
 
     @Override
     public void attachView(final MainContract.View view) {
@@ -35,27 +42,52 @@ public class MainPresenter implements MainContract.Presenter {
         mRvCardView.setOnClickListener(mCardClickListener);
     }
 
+    @Override
+    public void setCardDataRepository(final CardRepository repository) {
+        this.mCardDataRepository = repository;
+    }
+
+    /**
+     * 카드 RecyclerView 데이터 셋팅하기
+     */
+    @Override
+    public void loadCardDataList(final boolean isClear) {
+        mCardDataRepository.getCardData(new ICardSource.LoadCardDataCallback() {
+
+            @Override
+            public void onDataLoaded(final List<CardModel> list) {
+                if (list != null) {
+                    if (isClear) {
+                        mRvCardModel.clearAll();
+                    }
+                    mRvCardModel.addItems(list);
+                    mRvCardView.notifyDataAdapter();
+                }
+            }
+
+            @Override
+            public void onFailLoaded(final DatabaseException error) {
+                mView.showToast(error.toString());
+            }
+        });
+    }
+
+    /**
+     * (임시로) 카드 데이터 생성하기
+     */
+    public void makeTempCardData() {
+        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
+        mRootRef.setValue("Card Data");
+    }
+
     // 카드 RecyclerView 클릭 리스너
     private OnItemClickListener mCardClickListener = new OnItemClickListener() {
 
         @Override
         public void onItemClick(final int index) {
             final CardModel model = mRvCardModel.getItems(index);
-            mView.showToast(String.valueOf(model.getNum()));
+            mView.showToast(model.getmText());
         }
     };
 
-    /**
-     * 카드 RecyclerView 임시 데이터 셋팅하기 (List 잘 뿌려지는지 테스트용)
-     */
-    public void loadTempCardData() {
-        final List<CardModel> list = new ArrayList<>();
-        list.add(new CardModel(1));
-        list.add(new CardModel(2));
-        list.add(new CardModel(3));
-
-        mRvCardModel.clearAll();
-        mRvCardModel.addItems(list);
-        mRvCardView.notifyDataAdapter();
-    }
 }

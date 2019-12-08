@@ -1,5 +1,6 @@
 package com.theory.emhwang.ssg_ui.view.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,16 +17,26 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.theory.emhwang.ssg_ui.R;
 import com.theory.emhwang.ssg_ui.adapter.card.CardAdapter;
+import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainContract;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainPresenter;
 
 // 1. Adapter MVP 구현
 // 2. Firebase 실시간 DB 이용해서 서버 비슷하게 구현
-// 3. SQL 구현
+// 3. SQL 구현 -> ContentProvider -> Realm
+// 4. Animation
+// 5. ConstraintLayout
 // TODO : DataBinding 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainContract.View {
+
+    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
 
     // Presenter 객체
     private MainPresenter mPresenter;
@@ -61,6 +74,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         initRvCardSetting();
+
+        mRootRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String text = dataSnapshot.getValue(String.class);
+                Log.d("THEEND", "Text: " + text);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("THEEND", "Exception: " + databaseError.toException());
+            }
+        });
     }
 
     @Override
@@ -107,7 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRvCardView.setAdapter(adapter);
 
         mPresenter.setCardAdapterViewAndModel(adapter, adapter);
-        mPresenter.loadTempCardData();
+        mPresenter.setCardDataRepository(CardRepository.getInstance());
+        mPresenter.makeTempCardData();
+        mPresenter.loadCardDataList(true);
     }
 
     //////////////////////////////

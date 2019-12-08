@@ -1,6 +1,7 @@
 package com.theory.emhwang.ssg_ui.adapter.card.holder;
 
 import com.theory.emhwang.ssg_ui.R;
+import com.theory.emhwang.ssg_ui.data.card.CardModel;
 import com.theory.emhwang.ssg_ui.listener.OnItemClickListener;
 
 import android.content.Context;
@@ -42,8 +43,8 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     /**
      * 뷰 셋팅하기
      */
-    public void setViewData(final int index) {
-        mTvNum.setText(String.valueOf(index));
+    public void setViewData(final CardModel model) {
+        mTvNum.setText(model.getmText());
     }
 
     /**
