@@ -32,6 +32,11 @@ Clean Architecture의 목적은 비즈니스단을 외부와 분리하여 종속
 
 
 
+// https://taetaetae.github.io/2017/03/02/github-api/
+// https://github.com/HwangEunmi/Retrofit-Sample/blob/master/app/src/main/java/com/sample/retrofit/retrofitsample/common/ApiService.java
+// https://github.com/HwangEunmi/Retrofit-Sample/blob/master/app/src/main/java/com/sample/retrofit/retrofitsample/common/ApiManager.java
+// https://academy.realm.io/kr/posts/droidcon-jake-wharton-simple-http-retrofit-2/
+
 
 
 

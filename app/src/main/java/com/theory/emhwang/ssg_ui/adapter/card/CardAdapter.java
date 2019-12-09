@@ -6,7 +6,7 @@ import com.theory.emhwang.ssg_ui.R;
 import com.theory.emhwang.ssg_ui.adapter.card.contract.CardAdapterContract;
 import com.theory.emhwang.ssg_ui.adapter.card.holder.CardViewHolder;
 import com.theory.emhwang.ssg_ui.data.card.CardModel;
-import com.theory.emhwang.ssg_ui.listener.OnItemClickListener;
+import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder>
     private Context mContext;
 
     // 클릭 리스너
-    private OnItemClickListener mClickListener;
+    private IItemClickListener mClickListener;
 
     private List<CardModel> mList;
 
@@ -58,7 +58,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder>
     }
 
     @Override
-    public void setOnClickListener(final OnItemClickListener listener) {
+    public void setOnClickListener(final IItemClickListener listener) {
         this.mClickListener = listener;
     }
 

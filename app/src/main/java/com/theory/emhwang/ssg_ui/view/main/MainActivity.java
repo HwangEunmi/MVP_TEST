@@ -1,21 +1,5 @@
 package com.theory.emhwang.ssg_ui.view.main;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,12 +12,29 @@ import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainContract;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainPresenter;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 // 1. Adapter MVP 구현
 // 2. Firebase 실시간 DB 이용해서 서버 비슷하게 구현
 // 3. SQL 구현 -> ContentProvider -> Realm
 // 4. Animation
 // 5. ConstraintLayout
-// TODO : DataBinding 
+// TODO : DataBinding
+// TODO : https://academy.realm.io/kr/posts/droidcon-jake-wharton-simple-http-retrofit-2/  -> Retrofit 사용법
+// https://woovictory.github.io/2019/01/03/Android-What-is-retrofit/ -> Retrofit 장점
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainContract.View {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initRvCardSetting();
 
         mRootRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String text = dataSnapshot.getValue(String.class);

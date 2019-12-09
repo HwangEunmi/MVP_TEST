@@ -1,6 +1,7 @@
 package com.theory.emhwang.ssg_ui.data.card.source;
 
 // Memory Cache / Local/Remote DataSource
+// TODO : Add Memory Cache
 public class CardRepository implements ICardSource {
 
     private CardLocalDataSource mLocalDataSource;

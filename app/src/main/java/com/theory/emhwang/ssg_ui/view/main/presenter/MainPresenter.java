@@ -2,14 +2,13 @@ package com.theory.emhwang.ssg_ui.view.main.presenter;
 
 import java.util.List;
 
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.theory.emhwang.ssg_ui.adapter.card.contract.CardAdapterContract;
 import com.theory.emhwang.ssg_ui.data.card.CardModel;
 import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
 import com.theory.emhwang.ssg_ui.data.card.source.ICardSource;
-import com.theory.emhwang.ssg_ui.listener.OnItemClickListener;
+import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -66,8 +65,8 @@ public class MainPresenter implements MainContract.Presenter {
             }
 
             @Override
-            public void onFailLoaded(final DatabaseException error) {
-                mView.showToast(error.toString());
+            public void onFailLoaded(final int code, final String message) {
+                mView.showToast(message);
             }
         });
     }
@@ -81,12 +80,12 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     // 카드 RecyclerView 클릭 리스너
-    private OnItemClickListener mCardClickListener = new OnItemClickListener() {
+    private IItemClickListener mCardClickListener = new IItemClickListener() {
 
         @Override
         public void onItemClick(final int index) {
             final CardModel model = mRvCardModel.getItems(index);
-            mView.showToast(model.getmText());
+            mView.showToast(model.getName());
         }
     };
 

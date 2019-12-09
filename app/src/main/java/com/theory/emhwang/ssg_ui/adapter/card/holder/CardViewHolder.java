@@ -2,7 +2,7 @@ package com.theory.emhwang.ssg_ui.adapter.card.holder;
 
 import com.theory.emhwang.ssg_ui.R;
 import com.theory.emhwang.ssg_ui.data.card.CardModel;
-import com.theory.emhwang.ssg_ui.listener.OnItemClickListener;
+import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
 import android.content.Context;
 import android.view.View;
@@ -23,9 +23,9 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     private TextView mTvNum;
 
     // 클릭 리스너
-    private OnItemClickListener mClickListener;
+    private IItemClickListener mClickListener;
 
-    public CardViewHolder(@NonNull final Context mContext, final View itemView, final OnItemClickListener listener) {
+    public CardViewHolder(@NonNull final Context mContext, final View itemView, final IItemClickListener listener) {
         super(itemView);
         this.mContext = mContext;
         this.mClickListener = listener;
@@ -44,7 +44,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
      * 뷰 셋팅하기
      */
     public void setViewData(final CardModel model) {
-        mTvNum.setText(model.getmText());
+        mTvNum.setText(model.getName());
     }
 
     /**
