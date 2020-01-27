@@ -3,30 +3,29 @@ package com.theory.emhwang.ssg_ui;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.squareup.leakcanary.LeakCanary;
 
 public class SsgApplication extends Application {
 
     /**
      * Gson 객체
      */
-    private Gson mGson;
+    private static Gson mGson;
 
-    private SsgApplication() {
-    }
-
-    private static class SsgApplicationHolder {
-
-        private static final SsgApplication instance = new SsgApplication();
-    }
-
-    public static SsgApplication getInstance() {
-        return SsgApplicationHolder.instance;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // TODO : https://happydev.kr/17
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     /**
      * Gson 리턴하기
      */
-    public Gson getGson() {
+    public static Gson getGson() {
         if (mGson == null) {
             mGson = new Gson();
         }

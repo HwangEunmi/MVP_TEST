@@ -1,20 +1,15 @@
 package com.theory.emhwang.ssg_ui.adapter.card.holder;
 
-import com.theory.emhwang.ssg_ui.R;
-import com.theory.emhwang.ssg_ui.data.card.CardModel;
-import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
-
-import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import com.theory.emhwang.ssg_ui.R;
+import com.theory.emhwang.ssg_ui.base.BaseViewHolder;
+import com.theory.emhwang.ssg_ui.data.card.CardModel;
+import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
-public class CardViewHolder extends RecyclerView.ViewHolder {
-
-    private Context mContext;
+public class CardViewHolder extends BaseViewHolder<CardModel> implements View.OnClickListener {
 
     // 전체 레이아웃
     private LinearLayout mLlLayout;
@@ -25,41 +20,33 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     // 클릭 리스너
     private IItemClickListener mClickListener;
 
-    public CardViewHolder(@NonNull final Context mContext, final View itemView, final IItemClickListener listener) {
+    public CardViewHolder(final View itemView) {
         super(itemView);
-        this.mContext = mContext;
-        this.mClickListener = listener;
-        initView(itemView);
     }
 
-    /**
-     * 뷰 초기화하기
-     */
-    private void initView(final View view) {
+    @Override
+    protected void initView(final View view) {
         mLlLayout = view.findViewById(R.id.ll_layout);
         mTvNum = view.findViewById(R.id.tv_num);
+
+        mLlLayout.setOnClickListener(this);
     }
 
-    /**
-     * 뷰 셋팅하기
-     */
-    public void setViewData(final CardModel model) {
+    @Override
+    public void setData(final CardModel model) {
         mTvNum.setText(model.getName());
     }
 
-    /**
-     * 전체 레이아웃에 Click Listener 셋팅하기
-     */
-    public void setClickListener(final int index) {
-        mLlLayout.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void setClickListener(final IItemClickListener listener) {
+        this.mClickListener = listener;
+    }
 
-            @Override
-            public void onClick(final View v) {
-                if (mClickListener != null) {
-                    mClickListener.onItemClick(index);
-                }
-            }
-        });
+    @Override
+    public void onClick(final View v) {
+        if (mClickListener != null) {
+            mClickListener.onItemClick(getAdapterPosition());
+        }
     }
 
 }

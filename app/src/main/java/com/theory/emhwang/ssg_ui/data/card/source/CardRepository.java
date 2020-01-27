@@ -1,7 +1,7 @@
 package com.theory.emhwang.ssg_ui.data.card.source;
 
 // Memory Cache / Local/Remote DataSource
-// TODO : Add Memory Cache
+// TODO : MVP에서의 Memory Cache란?
 public class CardRepository implements ICardSource {
 
     private CardLocalDataSource mLocalDataSource;

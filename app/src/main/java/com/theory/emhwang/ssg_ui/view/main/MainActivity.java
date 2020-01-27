@@ -12,6 +12,7 @@ import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainContract;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainPresenter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,8 +34,6 @@ import androidx.viewpager.widget.ViewPager;
 // 4. Animation
 // 5. ConstraintLayout
 // TODO : DataBinding
-// TODO : https://academy.realm.io/kr/posts/droidcon-jake-wharton-simple-http-retrofit-2/  -> Retrofit 사용법
-// https://woovictory.github.io/2019/01/03/Android-What-is-retrofit/ -> Retrofit 장점
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainContract.View {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
@@ -94,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         mPresenter.detatchView();
+
         super.onDestroy();
     }
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 카드 RecyclerView 초기 셋팅하기
      */
     private void initRvCardSetting() {
-        final CardAdapter adapter = new CardAdapter(this);
+        final CardAdapter adapter = new CardAdapter();
         mRvCardView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRvCardView.setAdapter(adapter);
 

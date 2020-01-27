@@ -1,6 +1,6 @@
 package com.theory.emhwang.ssg_ui.listener;
 
-import com.theory.emhwang.ssg_ui.data.BaseResponseModel;
+import com.theory.emhwang.ssg_ui.base.BaseResponseModel;
 
 public interface IHTTPListener {
 

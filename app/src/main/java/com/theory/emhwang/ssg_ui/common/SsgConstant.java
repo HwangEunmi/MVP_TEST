@@ -12,7 +12,7 @@ public class SsgConstant {
 
     public class Param {
         public static final String HEADER_TOKEN = "Authorization";
-        public static final String SSG_TOKEN = "token fcba85d950e006d8c16463a5fde6661c80bd3f79";
+        public static final String SSG_TOKEN = "token c6c90d54e3ab61f780f18b49b337380963457641";
     }
 
 }

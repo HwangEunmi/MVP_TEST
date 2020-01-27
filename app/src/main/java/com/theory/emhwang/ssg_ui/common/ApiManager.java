@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 
 import com.theory.emhwang.ssg_ui.SsgApplication;
-import com.theory.emhwang.ssg_ui.data.BaseResponseModel;
+import com.theory.emhwang.ssg_ui.base.BaseResponseModel;
 import com.theory.emhwang.ssg_ui.listener.IHTTPListener;
-
-import android.text.method.NumberKeyListener;
-import android.util.Log;
 
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -114,7 +111,7 @@ public class ApiManager {
             public void onResponse(final Call<String> call, final retrofit2.Response<String> response) {
                 if ((response.code() == 200 || response.code() == 400 || response.code() == 403)
                     && response.body() != null) {
-                    final Object result = SsgApplication.getInstance().getGson().fromJson(response.body().toString(),
+                    final Object result = SsgApplication.getGson().fromJson(response.body().toString(),
                                                                                           type);
                     final BaseResponseModel model = (BaseResponseModel)result;
                     listener.onSuccess(model);

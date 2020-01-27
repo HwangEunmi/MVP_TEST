@@ -1,6 +1,6 @@
 package com.theory.emhwang.ssg_ui.data.card;
 
-import com.theory.emhwang.ssg_ui.data.BaseResponseModel;
+import com.theory.emhwang.ssg_ui.base.BaseResponseModel;
 
 // Github 조회 API에 Key값 맞추기
 public class CardModel extends BaseResponseModel {

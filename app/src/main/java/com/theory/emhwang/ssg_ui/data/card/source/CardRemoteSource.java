@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.theory.emhwang.ssg_ui.common.ApiManager;
-import com.theory.emhwang.ssg_ui.data.BaseResponseModel;
+import com.theory.emhwang.ssg_ui.base.BaseResponseModel;
 import com.theory.emhwang.ssg_ui.data.card.CardModel;
 import com.theory.emhwang.ssg_ui.listener.IHTTPListener;
 

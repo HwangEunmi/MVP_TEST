@@ -1,82 +1,43 @@
 package com.theory.emhwang.ssg_ui.adapter.card;
 
-import java.util.List;
-
-import com.theory.emhwang.ssg_ui.R;
-import com.theory.emhwang.ssg_ui.adapter.card.contract.CardAdapterContract;
-import com.theory.emhwang.ssg_ui.adapter.card.holder.CardViewHolder;
-import com.theory.emhwang.ssg_ui.data.card.CardModel;
-import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
-
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class CardAdapter extends RecyclerView.Adapter<CardViewHolder>
-                         implements CardAdapterContract.View, CardAdapterContract.Model {
+import com.theory.emhwang.ssg_ui.R;
+import com.theory.emhwang.ssg_ui.adapter.card.contract.CardAdapterContract;
+import com.theory.emhwang.ssg_ui.adapter.card.holder.CardViewHolder;
+import com.theory.emhwang.ssg_ui.base.BaseAdapter;
+import com.theory.emhwang.ssg_ui.base.BaseViewHolder;
+import com.theory.emhwang.ssg_ui.data.card.CardModel;
+import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
-    private Context mContext;
+public class CardAdapter extends BaseAdapter<CardModel>
+        implements CardAdapterContract.View, CardAdapterContract.Model {
 
     // 클릭 리스너
     private IItemClickListener mClickListener;
 
-    private List<CardModel> mList;
-
-    public CardAdapter(final Context context) {
-        this.mContext = context;
-    }
-
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.view_adapter_card, parent, false);
-        return new CardViewHolder(mContext, view, mClickListener);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_adapter_card, parent, false);
+        return new CardViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CardViewHolder holder, final int position) {
-        if (holder == null)
-            return;
-        holder.setClickListener(position);
-        holder.setViewData(mList.get(position));
+    public void onBindViewHolder(@NonNull BaseViewHolder<CardModel> holder, int position) {
+        super.onBindViewHolder(holder, position);
+        holder.setClickListener(mClickListener);
     }
 
-    @Override
-    public int getItemCount() {
-        return mList == null ? 0 : mList.size();
-    }
-
-    ///////
-
-    @Override
-    public CardModel getItems(final int index) {
-        return mList == null ? null : mList.get(index);
-    }
+    /////// Interface 메소드 ///////
 
     @Override
     public void setOnClickListener(final IItemClickListener listener) {
         this.mClickListener = listener;
-    }
-
-    @Override
-    public void notifyDataAdapter() {
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void addItems(final List<CardModel> list) {
-        mList = list;
-    }
-
-    @Override
-    public void clearAll() {
-        if (mList != null) {
-            mList.clear();
-        }
     }
 
 }
