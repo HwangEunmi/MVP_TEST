@@ -22,28 +22,28 @@ public class CardRemoteSource implements ICardSource {
     @Override
     public void getCardData(final LoadCardDataCallback listener) {
         mApiManager.getApiResponse(CardModel.class,
-                                   mApiManager.getApiService().getRepositoryInfo(),
-                                   new IHTTPListener() {
+                mApiManager.getApiService().getRepositoryInfo(),
+                new IHTTPListener() {
 
-                                       @Override
-                                       public void onSuccess(final BaseResponseModel model) {
-                                           if (listener != null) {
-                                               final CardModel response = (CardModel)model;
-                                               final List<CardModel> list = new ArrayList<>();
-                                               for (int i = 0; i < 5; i++) {
-                                                   list.add(new CardModel(response.getName() + i));
-                                               }
-                                               listener.onDataLoaded(list);
-                                           }
-                                       }
+                    @Override
+                    public void onSuccess(final BaseResponseModel model) {
+                        if (listener != null) {
+                            final CardModel response = (CardModel)model;
+                            final List<CardModel> list = new ArrayList<>();
+                            for (int i = 0; i < 5; i++) {
+                                list.add(new CardModel(response.getName() + i));
+                            }
+                            listener.onDataListLoaded(list);
+                        }
+                    }
 
-                                       @Override
-                                       public void onFail(final int code, final String message) {
-                                           if (listener != null) {
-                                               listener.onFailLoaded(code, message);
-                                           }
-                                       }
-                                   });
+                    @Override
+                    public void onFail(final int code, final String message) {
+                        if (listener != null) {
+                            listener.onFailLoaded(code, message);
+                        }
+                    }
+                });
     }
 
 }

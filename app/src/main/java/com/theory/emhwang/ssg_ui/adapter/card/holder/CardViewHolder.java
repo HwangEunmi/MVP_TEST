@@ -25,6 +25,13 @@ public class CardViewHolder extends BaseViewHolder<CardModel> implements View.On
     }
 
     @Override
+    public void onClick(final View v) {
+        if (mClickListener != null) {
+            mClickListener.onItemClick(getAdapterPosition());
+        }
+    }
+
+    @Override
     protected void initView(final View view) {
         mLlLayout = view.findViewById(R.id.ll_layout);
         mTvNum = view.findViewById(R.id.tv_num);
@@ -40,13 +47,6 @@ public class CardViewHolder extends BaseViewHolder<CardModel> implements View.On
     @Override
     public void setClickListener(final IItemClickListener listener) {
         this.mClickListener = listener;
-    }
-
-    @Override
-    public void onClick(final View v) {
-        if (mClickListener != null) {
-            mClickListener.onItemClick(getAdapterPosition());
-        }
     }
 
 }

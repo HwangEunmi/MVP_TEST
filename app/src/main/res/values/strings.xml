@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SSG_UI</string>
+
+    <string name="common_btn_cancel">취소</string>
+    <string name="common_btn_confirm">확인</string>
+
+    <!--SSL Error 문구-->
+    <string name="webview_ssl_message_01">이 사이트의 보안 인증서는 신뢰할 수 없습니다.\n</string>
+    <string name="webview_ssl_message_02">보안 인증서에 오류가 있습니다.\n</string>
+    <string name="webview_ssl_message_03">다음 화면으로 이동하시겠습니까?</string>
+
 </resources>

@@ -111,7 +111,7 @@ public class ApiManager {
             public void onResponse(final Call<String> call, final retrofit2.Response<String> response) {
                 if ((response.code() == 200 || response.code() == 400 || response.code() == 403)
                     && response.body() != null) {
-                    final Object result = SsgApplication.getGson().fromJson(response.body().toString(),
+                    final Object result = SsgApplication.getInstance().getGson().fromJson(response.body().toString(),
                                                                                           type);
                     final BaseResponseModel model = (BaseResponseModel)result;
                     listener.onSuccess(model);

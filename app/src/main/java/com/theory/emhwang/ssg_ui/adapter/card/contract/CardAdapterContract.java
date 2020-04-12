@@ -6,6 +6,9 @@ import com.theory.emhwang.ssg_ui.listener.IItemClickListener;
 
 import java.util.List;
 
+/**
+ * Card 정보 Adapter Contract
+ */
 public interface CardAdapterContract {
 
     interface View extends BaseAdapterContract.View {

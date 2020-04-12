@@ -54,7 +54,7 @@ public class MainPresenter implements MainContract.Presenter {
         mCardDataRepository.getCardData(new ICardSource.LoadCardDataCallback() {
 
             @Override
-            public void onDataLoaded(final List<CardModel> list) {
+            public void onDataListLoaded(final List<CardModel> list) {
                 if (list != null) {
                     if (isClear) {
                         mRvCardModel.clearAll();

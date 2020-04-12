@@ -12,7 +12,6 @@ import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainContract;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainPresenter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +33,7 @@ import androidx.viewpager.widget.ViewPager;
 // 4. Animation
 // 5. ConstraintLayout
 // TODO : DataBinding
+// TODO : Fragment (+ConstraintLayout)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainContract.View {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TabLayout
     private TabLayout mTbLayout;
 
-    // ViewPager
+    // 메인 이미지 ViewPager
     private ViewPager mVpView;
 
     // 카드 RecyclerView
