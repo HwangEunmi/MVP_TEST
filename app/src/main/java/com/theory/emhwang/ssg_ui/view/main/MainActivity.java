@@ -1,5 +1,21 @@
 package com.theory.emhwang.ssg_ui.view.main;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,31 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.theory.emhwang.ssg_ui.R;
 import com.theory.emhwang.ssg_ui.adapter.card.CardAdapter;
 import com.theory.emhwang.ssg_ui.data.card.source.CardRepository;
+import com.theory.emhwang.ssg_ui.view.goods.GoodsFragment;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainContract;
 import com.theory.emhwang.ssg_ui.view.main.presenter.MainPresenter;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-// 1. Adapter MVP 구현
-// 2. Firebase 실시간 DB 이용해서 서버 비슷하게 구현
-// 3. SQL 구현 -> ContentProvider -> Realm
-// 4. Animation
-// 5. ConstraintLayout
 // TODO : DataBinding
-// TODO : Fragment (+ConstraintLayout)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainContract.View {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("cardData");
@@ -51,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TabLayout mTbLayout;
 
     // 메인 이미지 ViewPager
-    private ViewPager mVpView;
+    // private ViewPager mVpView;
+    private FrameLayout mFlContents;
 
     // 카드 RecyclerView
     private RecyclerView mRvCardView;
@@ -74,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         initRvCardSetting();
+        initGoodsSetting();
 
         mRootRef.addValueEventListener(new ValueEventListener() {
 
@@ -117,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSpView = findViewById(R.id.sp_view);
         mEtSearch = findViewById(R.id.et_search);
         mTbLayout = findViewById(R.id.tb_layout);
-        mVpView = findViewById(R.id.vp_view);
+        // mVpView = findViewById(R.id.vp_view);
+        mFlContents = findViewById(R.id.contents);
         mRvCardView = findViewById(R.id.rv_card_view);
         mRvBrandView = findViewById(R.id.rv_brand_view);
         mIvView = findViewById(R.id.iv_view);
@@ -138,6 +137,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPresenter.setCardDataRepository(CardRepository.getInstance());
         mPresenter.makeTempCardData();
         mPresenter.loadCardDataList(true);
+    }
+
+    /**
+     * 상품 Fragment 초기 셋팅하기
+     */
+    private void initGoodsSetting() {
+        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.contents, GoodsFragment.newInstance());
+        transaction.commit();
     }
 
     //////////////////////////////

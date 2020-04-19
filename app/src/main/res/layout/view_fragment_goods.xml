@@ -8,6 +8,7 @@
         android:id="@+id/iv_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,2:1"
         app:layout_constraintLeft_toLeftOf="parent"

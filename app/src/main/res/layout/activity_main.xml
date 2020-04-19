@@ -61,11 +61,17 @@
                 android:background="#999999" />
 
             <!--ViewPager-->
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vp_view"
+            <!--            <androidx.viewpager.widget.ViewPager-->
+            <!--                android:id="@+id/vp_view"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:background="#99CC" />-->
+
+            <FrameLayout
+                android:id="@+id/contents"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="#99CC" />
+                android:background="#99cc" />
 
             <!--RecyclerView-->
             <androidx.recyclerview.widget.RecyclerView

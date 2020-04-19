@@ -37,7 +37,7 @@ public class GoodsPresenter implements GoodsContract.Presenter {
         mGoodsDataRepository.getGoodsData(new IGoodsSource.LoadGoodsDataCallback<GoodsModel>() {
             @Override
             public void onDataLoaded(final GoodsModel data) {
-                mView.drawImage(data.getAvatar_url());
+                mView.drawImage(data.getOwner().getAvatar_url());
             }
 
             @Override
